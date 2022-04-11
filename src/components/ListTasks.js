@@ -41,6 +41,7 @@ const ListTasks = ({ darkTheme }) => {
     const handleFilterCompleted = () => {
         dispatch(FilterCompletedTask())
         setCompletedTasks()
+        
     }
 
     const handleDelete = (id) => {
@@ -52,7 +53,7 @@ const ListTasks = ({ darkTheme }) => {
         window.location.reload()
     }
 
-    
+
 
     return (
         <ListContainer darkTheme={darkTheme}>
@@ -79,10 +80,10 @@ const ListTasks = ({ darkTheme }) => {
 
 
             <FooterList darkTheme={darkTheme}>
-                <p>{ tasksActive.length } Items left</p>
+                <p>{tasksActive.length} Items left</p>
 
                 <FilterContainer className='d-flex gap-2' darkTheme={darkTheme}>
-                    <p onClick={setAllTasks}>All</p>
+                    <p onClick={setAllTasks } >All</p>
                     <p onClick={handleFilterActive}>Active</p>
                     <p onClick={handleFilterCompleted}>Completed</p>
                 </FilterContainer>
