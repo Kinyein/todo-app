@@ -23,6 +23,7 @@ export const TodoTitle = styled.div`
     color: #fff;
 `
 export const TaskContainer = styled.div`
+    min-width: 500px;
     max-width: 90%;
     margin: -150px 5%;
     /* background-color: hsl(235, 24%, 19%); */

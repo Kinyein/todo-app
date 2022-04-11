@@ -1,7 +1,9 @@
 import { types } from "../types/types";
 
 const initialState = {
-    tasks: []
+    tasks: [],
+    tasksActive: [],
+    tasksCompleted: []
 }
 
 export const taskReducer = (state = initialState, action) => {
@@ -18,16 +20,18 @@ export const taskReducer = (state = initialState, action) => {
             }
         case types.deleteAllTasks:
             return {
-                tasks: []
+                tasks: [],
+                tasksActive: [],
+                tasksCompleted: []
             }
         case types.filterCompleted:
-            return{
+            return {
                 ...state,
                 tasks: [...state.tasks],
                 tasksCompleted: state.tasks.filter(task => task.completed === true)
             }
         case types.filterActive:
-            return{
+            return {
                 ...state,
                 tasksActive: state.tasks.filter(task => task.completed === false)
             }

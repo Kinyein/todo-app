@@ -18,30 +18,30 @@ const AddTasks = ({ darkTheme }) => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(formValues)
     dispatch(AddTask({
       ...formValues,
       id: uuid()
     }))
     reset()
-  }
+    window.location.reload()
+}
 
 
-  return (
-    <div className="d-flex flex-column w-100">
-      <form onSubmit={handleSubmit} className="w-100">
-        <AddTaskInput
-          type="text"
-          placeholder='Create a new task'
-          name='task'
-          onChange={handleInputChange}
-          value={task}
-          autoComplete="off"
-          darkTheme={darkTheme}
-        />
-      </form>
-    </div>
-  )
+return (
+  <div className="d-flex flex-column w-100">
+    <form onSubmit={handleSubmit} className="w-100">
+      <AddTaskInput
+        type="text"
+        placeholder='Create a new task'
+        name='task'
+        onChange={handleInputChange}
+        value={task}
+        autoComplete="off"
+        darkTheme={darkTheme}
+      />
+    </form>
+  </div>
+)
 }
 
 export default AddTasks

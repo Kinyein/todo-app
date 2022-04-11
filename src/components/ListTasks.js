@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { ClearAll, FilterContainer, FooterList, ListContainer, ListTasksDiv, } from '../styles/styledComponents/listTasksStyle'
 import { useDispatch, useSelector } from 'react-redux'
 import { ChangeComplete, DeleteAllTasks, DeleteTask, FilterActiveTask, FilterCompletedTask } from '../actions/TasksActions'
@@ -16,37 +16,31 @@ const ListTasks = ({ darkTheme }) => {
 
     const [tasksToList, setTasksToList] = useState(tasks)
 
-    // const [itemsLeft, setItemsLeft] = useState(tasksActive.length)
-
-    // console.log(tasksActive.length)
-
     useEffect(() => {
-        setAllTasks()
-    }, [tasks])
 
+    }, [])
 
     const setAllTasks = () => {
         setTasksToList(tasks)
     }
 
+    const setActiveTasks = () => {
+        setTasksToList(tasksActive)
+        console.log(tasksActive)
+    }
+
+    const setCompletedTasks = () => {
+        setTasksToList(tasksCompleted)
+    }
+
     const handleFilterActive = () => {
         dispatch(FilterActiveTask())
-        if (tasksActive === undefined) {
-            console.log('No tienes tareas activas')
-        } else {
-            setTasksToList(tasksActive)
-        }
-
+        setActiveTasks()
     }
 
     const handleFilterCompleted = () => {
         dispatch(FilterCompletedTask())
-
-        if (tasksCompleted === undefined) {
-            console.log('No tienes tareas completadas')
-        } else {
-            setTasksToList(tasksCompleted)
-        }
+        setCompletedTasks()
     }
 
     const handleDelete = (id) => {
@@ -55,15 +49,10 @@ const ListTasks = ({ darkTheme }) => {
 
     const handleDeleteAll = () => {
         dispatch(DeleteAllTasks())
+        window.location.reload()
     }
 
-    // const itemsLeftCheck = () => {
-    //     if (tasksActive.length === 0) {
-    //         setItemsLeft('0')
-    //     }else{
-    //         setItemsLeft(tasksActive.length)
-    //     }
-    // }
+    
 
     return (
         <ListContainer darkTheme={darkTheme}>
@@ -90,7 +79,7 @@ const ListTasks = ({ darkTheme }) => {
 
 
             <FooterList darkTheme={darkTheme}>
-                <p>Items left</p>
+                <p>{ tasksActive.length } Items left</p>
 
                 <FilterContainer className='d-flex gap-2' darkTheme={darkTheme}>
                     <p onClick={setAllTasks}>All</p>
