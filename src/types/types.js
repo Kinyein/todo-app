@@ -6,7 +6,4 @@ export const types = {
     filterAll: '[Tasks] ShowAll',
     filterActive: '[Tasks] Active',
     filterCompleted: '[Tasks] Completed',
-
-    lightTheme: 'LightTheme',
-    darkTheme: 'DarkTheme'
 }
