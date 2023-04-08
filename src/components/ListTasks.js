@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { ClearAll, FilterContainer, FooterList, ListContainer, ListTasksDiv, } from '../styles/styledComponents/listTasksStyle'
 import { useDispatch, useSelector } from 'react-redux'
-import { ChangeComplete, DeleteAllTasks, DeleteTask, FilterActiveTask, FilterCompletedTask } from '../actions/TasksActions'
+import { ChangeComplete, DeleteAllTasks, DeleteTask, FilterActiveTask, FilterCompletedTask, UpdateTask } from '../Redux/actions/TasksActions'
 import { AiOutlineClose } from 'react-icons/ai'
 
 const ListTasks = ({ darkTheme }) => {
@@ -16,9 +16,7 @@ const ListTasks = ({ darkTheme }) => {
 
     const [tasksToList, setTasksToList] = useState(tasks)
 
-    useEffect(() => {
-
-    }, [])
+    useEffect(() => {}, [tasksToList])
 
     const setAllTasks = () => {
         setTasksToList(tasks)
@@ -26,7 +24,6 @@ const ListTasks = ({ darkTheme }) => {
 
     const setActiveTasks = () => {
         setTasksToList(tasksActive)
-        console.log(tasksActive)
     }
 
     const setCompletedTasks = () => {
@@ -41,19 +38,24 @@ const ListTasks = ({ darkTheme }) => {
     const handleFilterCompleted = () => {
         dispatch(FilterCompletedTask())
         setCompletedTasks()
-        
     }
 
     const handleDelete = (id) => {
         dispatch(DeleteTask(id))
+        setAllTasks();
     }
 
     const handleDeleteAll = () => {
         dispatch(DeleteAllTasks())
-        window.location.reload()
+        setAllTasks();
     }
 
+    const handleUpdate = (task) => {
+        task.completed = task.completed ? false : true
+        dispatch(UpdateTask(task))
+    }
 
+    console.log('tasks: ',tasks);
 
     return (
         <ListContainer darkTheme={darkTheme}>
@@ -65,8 +67,9 @@ const ListTasks = ({ darkTheme }) => {
 
                             <label>
                                 <input
-                                    onClick={() => t.completed = true}
-                                    type="radio"
+                                    onClick={() => handleUpdate(t)}
+                                    type="checkbox"
+                                    defaultChecked={t.completed}
                                     value={t.task}
                                 /> {t.task}
                             </label>
@@ -83,12 +86,15 @@ const ListTasks = ({ darkTheme }) => {
                 <p>{tasksActive.length} Items left</p>
 
                 <FilterContainer className='d-flex gap-2' darkTheme={darkTheme}>
-                    <p onClick={setAllTasks } >All</p>
-                    <p onClick={handleFilterActive}>Active</p>
-                    <p onClick={handleFilterCompleted}>Completed</p>
+                    <a href="#" onClick={setAllTasks} >All</a>
+                    <a href="#" onClick={handleFilterActive}>Active</a>
+                    <a href="#" onClick={handleFilterCompleted}>Completed</a>
+                    {/* <a href="#">All</a>
+                    <a href="#">Active</a>
+                    <a href="#">Completed</a> */}
                 </FilterContainer>
 
-                <ClearAll onClick={handleDeleteAll}>Clear Completed</ClearAll>
+                <ClearAll onClick={handleDeleteAll}>Clear All</ClearAll>
             </FooterList>
         </ListContainer>
     )

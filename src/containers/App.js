@@ -12,7 +12,7 @@ const App = () => {
   const [iconTheme, setIconTheme] = useState()
 
   useEffect(() => {
-    changeTheme()
+    changeTheme();
   }, [])
   
 

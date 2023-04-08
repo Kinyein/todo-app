@@ -7,6 +7,13 @@ export const AddTask = (task) => {
     }
 }
 
+export const UpdateTask = (task) => {
+    return {
+        type: types.updateTask,
+        payload: task
+    }
+}
+
 export const DeleteTask = (id) => {
     return {
         type: types.deleteTask,
@@ -31,14 +38,3 @@ export const FilterActiveTask = () => {
         type: types.filterActive
     }
 }
-
-// export const lightTheme = () => {
-//     return {
-//         type: types.lightTheme
-//     }
-// }
-// export const darkTheme = () => {
-//     return {
-//         type: types.darkTheme
-//     }
-// }

@@ -18,10 +18,34 @@ export const ListTasksDiv = styled.div`
 
     label{
         word-wrap: break-word;
+        display: flex;
+        align-items: center;
+        gap: 10px;
 
-        input:checked{
-            margin: 0 20px;
-        }   
+        input {
+            visibility: hidden;
+
+            &::before {
+                content: "";
+                position: relative;
+                visibility: visible;
+                padding: 0 8px;
+                left: 0;
+                bottom: 6px;
+                border-radius: 50%;
+                border: 1px solid hsl(235, 19%, 35%);
+                cursor: pointer;
+            }
+
+            &:checked{
+                margin-left: 20px;
+
+                &::before {
+                background-color: green;
+                }
+            }
+        }
+
     }
 
     button{
@@ -47,24 +71,27 @@ export const FooterList = styled.div`
     flex-wrap: wrap;
     gap: 20px;
 
-    p{
+    a{
         color: ${(props) => props.darkTheme === true ? 'hsl(235, 19%, 35%)' : '#000'} ;
         user-select: none;
     }
 `
 export const FilterContainer = styled.div`
     display: flex;
-    p{
+    a{
         cursor: pointer;
+        text-decoration: none;
         transition: .1s;
-    }
-    p:hover{
-        color: ${(props) => props.darkTheme === true ? 'hsl(236, 33%, 92%)' : 'hsl(234, 11%, 52%)'} ;
-        transform: scale(1.1);
+
+        &:hover{
+            color: ${(props) => props.darkTheme === true ? 'hsl(236, 33%, 92%)' : 'hsl(234, 11%, 52%)'} ;
+            transform: scale(1.1);
+        }
     }
 `
-export const ClearAll = styled.p`
+export const ClearAll = styled.a`
     cursor: pointer;
+    text-decoration: none;
     transition: .1s;
 
     &:hover{

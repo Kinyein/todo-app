@@ -1,6 +1,6 @@
 import {  combineReducers, createStore } from "redux";
 import { taskReducer } from "../reducers/taksReducers";
-import { getLocalStorage, saveLocalStorage } from "../utils/LocalStorage";
+import { getLocalStorage, saveLocalStorage } from "../../utils/LocalStorage";
 
 const storageState = getLocalStorage()
 

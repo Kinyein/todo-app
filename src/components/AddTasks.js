@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { AddTask } from '../actions/TasksActions'
+import { AddTask } from '../Redux/actions/TasksActions'
 import useForm from '../hooks/useForm'
 import uuid from 'react-uuid'
 import { AddTaskInput } from '../styles/styledComponents/addtaskStyle'
